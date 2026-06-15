@@ -11,9 +11,14 @@
     - Run as SYSTEM
 #>
 
-# =============================================
-# Block 1: Day Check
-# =============================================
+$exclusionProfiles = @(
+    "Administrator",
+    "Default",
+    "Public"
+)
+
+$targetProfilePath = "C:\Users"
+
 function Get-ExecutionFlag {
     $currentDay = (Get-Date).DayOfWeek
 
@@ -26,18 +31,6 @@ function Get-ExecutionFlag {
         return $false
     }
 }
-
-# =============================================
-# Block 2: Configuration
-# =============================================
-$exclusionProfiles = @(
-    "Administrator",
-    "Default",
-    "Public"
-)
-
-$targetProfilePath = "C:\Users"
-
 
 function Get-ProfilesToDelete {
     $profiles = Get-ChildItem -Path $targetProfilePath -Directory |
